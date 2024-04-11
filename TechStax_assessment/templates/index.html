@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Events</title>
+</head>
+<body>
+    <h1>Latest GitHub Events</h1>
+    <ul id="events-list"></ul>
+
+    <script>
+        function fetchEvents() {
+            fetch('https://8af8-106-51-188-164.ngrok-free.app/events')
+                .then(response => response.json())
+                .then(data => {
+                    const eventsList = document.getElementById('events-list');
+                    eventsList.innerHTML = ''; // Clear previous events
+                    data.forEach(event => {
+                        const listItem = document.createElement('li');
+                        if (event.action === 'push') {
+                    listItem.textContent = `${event.author} pushed to ${event.to_branch} on ${new Date(event.time_stamp).toLocaleString()}`;
+                } else if (event.action === 'pull_request') {
+                    listItem.textContent = `${event.author} submitted a pull request from ${event.from_branch} to ${event.to_branch} on ${new Date(event.time_stamp).toLocaleString()}`;
+                } else if (event.action=="merge") {
+                    listItem.textContent= `${event.author} merged branch ${event.from_branch} to ${event.to_branch} on ${event.timestamp}`
+                }
+                        
+                        eventsList.appendChild(listItem);
+                    });
+                })
+                .catch(error => console.error('Error fetching events:', error));
+        }
+    
+        // Fetch events initially
+        fetchEvents();
+    
+        // Fetch events every 15 seconds
+        setInterval(fetchEvents, 15000);
+    </script>
+    
+    
+</body>
+</html>

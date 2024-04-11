@@ -19,9 +19,9 @@
                     data.forEach(event => {
                         const listItem = document.createElement('li');
                         if (event.action === 'push') {
-                    listItem.textContent = `${event.author} pushed to ${event.to_branch} on ${new Date(event.time_stamp).toLocaleString()}`;
+                    listItem.textContent = `${event.author} pushed to ${event.to_branch} on ${event.time_stamp}`;
                 } else if (event.action === 'pull_request') {
-                    listItem.textContent = `${event.author} submitted a pull request from ${event.from_branch} to ${event.to_branch} on ${new Date(event.time_stamp).toLocaleString()}`;
+                    listItem.textContent = `${event.author} submitted a pull request from ${event.from_branch} to ${event.to_branch} on ${event.time_stamp}`;
                 } else if (event.action=="merge") {
                     listItem.textContent= `${event.author} merged branch ${event.from_branch} to ${event.to_branch} on ${event.timestamp}`
                 }

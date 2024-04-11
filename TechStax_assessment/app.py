@@ -1,4 +1,5 @@
 
+from datetime import datetime
 from flask import Flask, jsonify, request, json,render_template
 from db_connection import store_event,collection
 
@@ -23,6 +24,7 @@ def eventcheck():
     author_name=data["pusher"]["name"]
     branch_name = data['ref'].split('/')[-1]
     time=data["head_commit"]["timestamp"]
+    print(type(time))
     hash=data["head_commit"]["id"]
     eventdetails ={'request_id':hash,'author':author_name,'action':event_type,'from_branch':branch_name,'to_branch':branch_name,
                   'time_stamp':time}
@@ -74,7 +76,8 @@ def eventcheck():
 @app.route('/events', methods=['GET'])
 def get_latest_events():
     # Query MongoDB to get the latest events
-    latest_events = list(collection.find().sort('timestamp',-1).limit(20))
+    latest_events = list(collection.find().sort('time_stamp',-1).limit(5))
+    # latest_events_sorted = sorted(latest_events, key=lambda x: datetime.strptime(x['time_stamp'], '%Y-%m-%dT%H:%M:%S%z'), reverse=True)
     for event in latest_events:
      event['_id'] = str(event['_id'])
      

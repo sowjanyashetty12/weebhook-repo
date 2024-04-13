@@ -11,7 +11,7 @@
 
     <script>
         function fetchEvents() {
-            fetch('https://8af8-106-51-188-164.ngrok-free.app/events')
+            fetch('https://f4ee-106-51-189-226.ngrok-free.app/events')
                 .then(response => response.json())
                 .then(data => {
                     const eventsList = document.getElementById('events-list');
@@ -23,7 +23,7 @@
                 } else if (event.action === 'pull_request') {
                     listItem.textContent = `${event.author} submitted a pull request from ${event.from_branch} to ${event.to_branch} on ${event.time_stamp}`;
                 } else if (event.action=="merge") {
-                    listItem.textContent= `${event.author} merged branch ${event.from_branch} to ${event.to_branch} on ${event.timestamp}`
+                    listItem.textContent= `${event.author} merged branch ${event.from_branch} to ${event.to_branch} on ${event.time_stamp}`
                 }
                         
                         eventsList.appendChild(listItem);

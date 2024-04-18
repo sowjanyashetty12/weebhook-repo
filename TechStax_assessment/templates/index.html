@@ -11,7 +11,7 @@
 
     <script>
         function fetchEvents() {
-            fetch('https://f4ee-106-51-189-226.ngrok-free.app/events')
+            fetch('/events')
                 .then(response => response.json())
                 .then(data => {
                     const eventsList = document.getElementById('events-list');

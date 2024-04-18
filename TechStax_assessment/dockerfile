@@ -1,0 +1,19 @@
+# Use the official Python image as the base
+FROM python:3.11.4
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the application code into the container
+COPY . /app
+
+# Install dependencies
+RUN pip install -r requirements.txt
+RUN python db_connection.py
+
+# Expose port 5000 (or whichever port your Flask app listens on)
+EXPOSE 5001
+
+# Run the Flask application
+
+CMD python ./app.py 

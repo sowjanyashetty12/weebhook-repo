@@ -20,6 +20,6 @@ Make sure you have docker installed in your machine
 
 1 : Clone this repository
     git clone https://github.com/sowjanyashetty12/weebhook-repo
-2 : cd TechStax_assessment
+2 : cd Github_events_project
 3 : Start the Docker container
     docker-compose up 
